@@ -3,7 +3,7 @@
 #include<fstream>
 
 using namespace std;
-//trapezium rule:
+//trapezium rule implementation in C++:
 double trap(double (func)(double), double a, double b, int n){
     double x,sum=0,del;
     int i;
@@ -22,7 +22,7 @@ double trap(double (func)(double), double a, double b, int n){
         return sum*0.5*del;
     }
 }
-//user defined function:
+//user defined functions:
 double f1(double x){
     return pow(x,2);
 }
@@ -31,6 +31,7 @@ double f2(double x){
 }
 int main(){
 //to print values of the integral for various values of n in a dat file
+//the data file can then be passed to gnuplot to process the graph the computed values.
     ofstream fout("n.dat");
     for(double j=-10;j<=10;j+=0.01){
         fout<<j<<" "<<trap(f1,0,j,2000)<<" "<<f2(j)<<endl; // to write to the file
