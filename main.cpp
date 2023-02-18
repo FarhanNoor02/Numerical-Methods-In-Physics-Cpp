@@ -1,0 +1,55 @@
+#include <iostream>
+#include<cmath>
+#include<fstream>
+
+using namespace std;
+//user defined function:
+double f(double x){
+    return sin(x*x);
+}
+double g(double x){
+    return cos(x*x);
+}
+//simpson's 1/3 rule C++ implementation:
+double simp(double a, double b, int n)
+{
+    double d,A;
+    double I=0,J=0;
+    int i;
+    d=(b-a)/n;
+    for(i=1;i<n;i+=2){
+        I=I+f(a+i*d);
+    }
+    for(i=2;i<n;i+=2){
+        J=J+f(a+i*d);
+    }
+    A=(d/3)*(f(a)+f(b)+4*I+2*J);
+    return A;
+}
+
+double simp2(double a, double b, int n)
+{
+    double d,A;
+    double I=0,J=0;
+    int i;
+    d=(b-a)/n;
+    for(i=1;i<n;i+=2){
+        I=I+g(a+i*d);
+    }
+    for(i=2;i<n;i+=2){
+        J=J+g(a+i*d);
+    }
+    A=(d/3)*(g(a)+g(b)+4*I+2*J);
+    return A;
+}
+
+int main(){
+
+    //to store values of fresnel sine,cosine curves in a data file:
+    ofstream fout("simp.dat");
+    for(double j=-10;j<=10;j+=0.001){
+        fout<<j<<" "<<simp(0,j,10000)<<" "<<simp2(0,j,10000)<<endl;
+    }
+
+    return 0;
+}
