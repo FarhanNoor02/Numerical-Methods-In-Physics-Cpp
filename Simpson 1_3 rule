@@ -3,7 +3,9 @@
 #include<fstream>
 
 using namespace std;
-//user defined function:
+//user defined function; suppose we wish to display the cornu spiral.
+//it uses two functions-fresnel integrals-which cannot be expressed in elementary functions.
+//so we resort to a numerical approach:
 double f(double x){
     return sin(x*x);
 }
@@ -26,7 +28,7 @@ double simp(double a, double b, int n)
     A=(d/3)*(f(a)+f(b)+4*I+2*J);
     return A;
 }
-
+//redundant:
 double simp2(double a, double b, int n)
 {
     double d,A;
