@@ -9,14 +9,17 @@ double f(double x)
     return x*x*sin(x)+2;
 
 }
+//forward scheme:
 double D2f_f(double x, double h)
 {
     return (f(x+2*h)-2*f(x+h)+f(x))/(pow(h,2));
 }
+//central scheme
 double D2f_c(double x,double h)
 {
     return (f(x+h)+f(x-h)-2*f(x))/(pow(h,2));
 }
+//backward shceme
 double D2f_b(double x,double h)
 {
     return (f(x-2*h)-2*f(x-h)+f(x))/(pow(h,2));
@@ -24,12 +27,17 @@ double D2f_b(double x,double h)
 
 int main()
 {
-   double l=-5,u=5;
+   //interval over which we differentiate, [l,u]:
+    double l=-5,u=5;
+    //write everything to a dat file:
     ofstream fout("f-f''.dat");
+    //apply forward scheme at start of interval:
     fout<<l<<" "<<D2f_f(l,0.01)<<endl;
+    //apply central scheme within the interval:
     for(double x=+0.01;x<=u-0.01;x+=0.01){
         fout<<x<<" "<<D2f_c(x,0.01)<<endl;
     }
+    //apply backward scheme at end of interval:
     fout<<u<<" "<<D2f_b(u,0.01)<<endl;
 
     return 0;
