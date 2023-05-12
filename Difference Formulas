@@ -1,0 +1,36 @@
+#include<iostream>
+#include<cmath>
+#include<fstream>
+
+using namespace std;
+
+double f(double x){
+    return pow(x,3)/3;
+}
+//forward difference scheme:
+double Df_f(double x,double h){
+    double d=(f(x+h)-f(x))/h;
+    return d;
+}
+//central difference scheme
+double Df_c(double x, double h){
+    double dc=(f(x+h)-f(x-h))/(2*h);
+    return dc;
+}
+//backward difference scheme
+double Df_b(double x, double h){
+    double d=(f(x)-f(x-h))/h;
+    return d;
+}
+
+int main(){
+    double l=-10,u=10;
+    ofstream fout("f-f'.dat");
+    fout<<l<<" "<<Df_f(l,0.01)<<endl;
+    for(double x=0.01+l;x<=u-0.01;x+=0.01){
+            fout<<x<<" "<<Df_c(x,0.01)<<endl;
+    }
+    fout<<l<<" "<<Df_b(u,0.01)<<endl;
+
+    return 0;
+}
