@@ -5,12 +5,12 @@ using namespace std;
 double f(double x){
     return exp(-x)*sin(x);
 }
-
+//forward scheme:
 double Df_f(double x, double h){
     double del=-f(x+2*h)+4*f(x+h)-3*f(x);
     return del/(2*h);
 }
-
+//backward scheme:
 double Df_b(double x, double h){
     return (3*f(x)-4*f(x-h)+f(x-2*h))/(2*h);
 }
